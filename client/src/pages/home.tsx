@@ -28,10 +28,12 @@ import {
   SIGNATURE_ORBIT_TEXT,
 } from "@/lib/constants";
 import { scrollToContact } from "@/lib/utils";
+import { SEO } from "@/components/seo";
 import {
   ServicesBackgroundShapes,
   TestimonialsBackgroundShapes,
   AccreditationBackgroundShapes,
+  HeroGridLines,
 } from "@/components/decorative-shapes";
 import logoPath from "@assets/logo.jpg";
 
@@ -47,14 +49,10 @@ function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative lg:h-screen flex flex-col justify-end overflow-hidden bg-[#F8F8F8]"
+      className="relative lg:h-screen flex flex-col justify-center overflow-hidden bg-[#F8F8F8]"
       data-testid="section-hero"
     >
-      {/* Subtle grid texture */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: "linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)",
-        backgroundSize: "80px 80px"
-      }} />
+      <HeroGridLines />
 
       {/* Signature accreditation orbit */}
       <div className="absolute top-[12%] right-[3%] z-[2] scale-[0.6] md:scale-[0.73] lg:scale-100 origin-top-right">
@@ -69,10 +67,10 @@ function HeroSection() {
 
       <motion.div
         style={{ y: heroY, opacity: heroOpacity }}
-        className="relative z-10 px-6 lg:px-12 pb-16 sm:pb-20 lg:pb-24 pt-44 sm:pt-52 lg:pt-32"
+        className="relative z-10 px-6 lg:px-12 pb-8 sm:pb-10 lg:pb-12 pt-20 sm:pt-24 lg:pt-20"
       >
-        <div className="flex items-end justify-between gap-8 max-w-[1400px] mx-auto">
-          <div className="flex-1">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-[1400px] mx-auto items-end">
+          <div className="md:col-span-3 pb-8">
             <h1
               className="font-heading text-[clamp(2.5rem,8vw,8rem)] font-extrabold text-foreground leading-[0.88] tracking-[-0.03em]"
               data-testid="text-hero-headline"
@@ -108,7 +106,7 @@ function HeroSection() {
             initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ delay: 1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden md:flex flex-col items-end gap-7 pb-4 max-w-[300px] lg:max-w-[340px]"
+            className="hidden md:flex flex-col items-end gap-7 pb-4 w-full md:pr-[10%]"
           >
             {/* Quick stats */}
             <div className="flex items-center gap-5">
@@ -586,13 +584,14 @@ function ClientsSection() {
               : isMedLogo
               ? "max-h-20 sm:max-h-24"
               : isRealEstate
-              ? "max-h-28 sm:max-h-32"
+              ? "max-h-36 sm:max-h-44"
               : "max-h-20 sm:max-h-24";
-            const cardHeight = isRealEstate ? "h-[140px]" : "h-[110px]";
+            const cardHeight = isRealEstate ? "h-[180px]" : "h-[110px]";
+            const cardWidth = isRealEstate ? "w-[280px] sm:w-[320px]" : "w-[220px] sm:w-[250px]";
             return (
               <div
                 key={`${segment.title}-${logoIndex}`}
-                className={`mx-2 w-[220px] sm:w-[250px] ${cardHeight} rounded-xl bg-white border border-border/50 flex items-center justify-center px-5 flex-shrink-0`}
+                className={`mx-2 ${cardWidth} ${cardHeight} rounded-xl bg-white border border-border/50 flex items-center justify-center px-5 flex-shrink-0`}
                 data-testid={`client-logo-${rowIndex}-${logoIndex}`}
               >
                 {isTextEntry ? (
@@ -621,7 +620,7 @@ function ClientsSection() {
                   ) : (
                     <Marquee
                       direction={rowIndex % 2 === 0 ? "left" : "right"}
-                      speed="slow"
+                      speed={segment.title === "Real Estate" ? "very-slow" : "slow"}
                       className="w-full"
                     >
                       {logoCards}
@@ -781,8 +780,8 @@ function ContactSection() {
                   </div>
                   <div>
                     <p className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted-foreground mb-2">Email</p>
-                    <a href="mailto:info@iconcepts.in" className="text-primary text-sm hover:underline">
-                      info@iconcepts.in
+                    <a href="mailto:connect@iconcepts.in" className="text-primary text-sm hover:underline">
+                      connect@iconcepts.in
                     </a>
                   </div>
                 </div>
@@ -802,6 +801,10 @@ function ContactSection() {
 export default function Home() {
   return (
     <main>
+      <SEO
+        path="/"
+        description="iConcepts is an INS Accredited & DIPR Empanelled 360° advertising agency in Chennai offering creative services, media planning, BTL execution, and event management for India's leading brands."
+      />
       <HeroSection />
       <MarqueeBand />
       <ServicesCluster />

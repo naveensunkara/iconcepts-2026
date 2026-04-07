@@ -13,6 +13,8 @@ import {
 } from "@/components/animations";
 import { SIGNATURE_ORBIT_TEXT } from "@/lib/constants";
 import { scrollToContact } from "@/lib/utils";
+import { SEO } from "@/components/seo";
+import { HeroGridLines } from "@/components/decorative-shapes";
 
 const PROPFAIR_CITIES = [
   { city: "Chennai", editions: "7 Editions", color: "bg-primary" },
@@ -42,11 +44,7 @@ function EventsHero() {
       className="relative min-h-screen bg-[#F8F8F8] overflow-hidden flex items-center"
       data-testid="section-events-hero"
     >
-      {/* Subtle grid texture */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: "linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)",
-        backgroundSize: "80px 80px"
-      }} />
+      <HeroGridLines />
       <div className="absolute top-[11%] right-[3%] z-[2] scale-[0.6] md:scale-[0.73] lg:scale-100 origin-top-right">
         <SignatureOrbit
           text={SIGNATURE_ORBIT_TEXT}
@@ -57,14 +55,7 @@ function EventsHero() {
         />
       </div>
 
-      {/* Grid lines */}
-      <div className="absolute inset-0 pointer-events-none hidden lg:block">
-        <div className="absolute top-[20%] left-0 w-full h-[1px] bg-foreground/[0.04]" />
-        <div className="absolute top-0 left-[15%] w-[1px] h-full bg-foreground/[0.04]" />
-        <div className="absolute top-0 right-[15%] w-[1px] h-full bg-foreground/[0.04]" />
-      </div>
-
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 w-full flex flex-col items-center justify-center pb-20">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 w-full flex flex-col items-center justify-center pb-10">
         <div className="text-center max-w-4xl mx-auto">
           <motion.h1
             initial={{ opacity: 0, y: 80 }}
@@ -87,14 +78,6 @@ function EventsHero() {
             From product launches to large-scale public engagements — we conceptualise
             and execute events that build lasting brand presence with full accountability.
           </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1 }}
-            className="mt-8 flex justify-center"
-          >
-            <img src="/propfair-logo.png" alt="Propfair" className="h-20 object-contain" />
-          </motion.div>
         </div>
       </div>
 
@@ -134,7 +117,7 @@ function PropfairSection() {
                     </div>
                     <p className="text-white/60 text-xs font-mono">14+ Events · 5 Cities · 1 Vision</p>
                   </div>
-                  <img src="/propfair-logo.png" alt="Propfair" className="h-[120px] object-contain" />
+                  <img src="/propfair-logo.png" alt="Propfair" className="h-[60px] sm:h-[80px] lg:h-[120px] object-contain max-w-[45%]" />
                 </div>
                 <div className="relative rounded-2xl overflow-hidden border border-white/[0.06]">
                   <img
@@ -401,7 +384,7 @@ function RotaryEventSection() {
                   preload="metadata"
                   poster="/rotary%20event/6T8A1167.JPG"
                 >
-                  <source src="/rotary%20event/WhatsApp%20Video%202026-03-27%20at%2010.20.45_trimmed.mp4" type="video/mp4" />
+                  <source src="/WhatsApp%20Video%202026-04-03%20at%2009.45.21.mp4" type="video/mp4" />
                 </video>
               </div>
               <p className="mt-3 text-white/20 text-xs font-mono uppercase tracking-[0.2em]">
@@ -493,6 +476,11 @@ function RotaryEventSection() {
 export default function Events() {
   return (
     <main>
+      <SEO
+        title="Events & Experiences"
+        path="/events"
+        description="Product launches, corporate events, brand activations, and Propfair property expos across Chennai, Pune, Mumbai, Bangalore, and Hyderabad. 14+ editions and 1000+ leads generated."
+      />
       <EventsHero />
       <PropfairSection />
       <EventsExperiencesSection />

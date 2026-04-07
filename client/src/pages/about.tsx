@@ -1,5 +1,5 @@
 import { motion, useScroll } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Trophy3D } from "@/components/trophy3d";
 import { ArrowRight } from "lucide-react";
 import {
@@ -16,6 +16,8 @@ import {
 } from "@/components/animations";
 import { SIGNATURE_ORBIT_TEXT } from "@/lib/constants";
 import { scrollToContact } from "@/lib/utils";
+import { SEO } from "@/components/seo";
+import { HeroGridLines } from "@/components/decorative-shapes";
 
 function AboutHero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -27,14 +29,9 @@ function AboutHero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[85vh] lg:h-screen flex flex-col justify-end bg-[#F8F8F8] overflow-hidden"
-      data-testid="section-about-hero"
+      className="relative min-h-[85vh] lg:h-screen flex flex-col justify-center bg-[#F8F8F8] overflow-hidden"
     >
-      {/* Subtle grid texture */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: "linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)",
-        backgroundSize: "80px 80px"
-      }} />
+      <HeroGridLines />
       <div className="absolute top-[12%] right-[3%] z-[2] scale-[0.6] md:scale-[0.73] lg:scale-100 origin-top-right">
         <SignatureOrbit
           text={SIGNATURE_ORBIT_TEXT}
@@ -54,7 +51,7 @@ function AboutHero() {
         />
       </div>
 
-      <div className="relative z-10 px-6 lg:px-12 pb-12 sm:pb-16 lg:pb-24 pt-32 sm:pt-36 lg:pt-0">
+      <div className="relative z-10 px-6 lg:px-12 pb-8 sm:pb-10 lg:pb-12 pt-20 sm:pt-24 lg:pt-20">
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
           {/* Left: Headline + para */}
           <div className="lg:col-span-7">
@@ -241,12 +238,16 @@ function FounderBorder() {
 }
 
 function TeamCard({ member, index }: { member: typeof TEAM_MEMBERS[0]; index: number }) {
+  const [tapped, setTapped] = useState(false);
+
   return (
     <FadeIn delay={index * 0.08}>
       {/* Perspective wrapper */}
       <motion.div
         whileHover="hovered"
         initial="rest"
+        animate={tapped ? "hovered" : "rest"}
+        onTap={() => setTapped((prev) => !prev)}
         className="relative aspect-[3/4] max-h-[420px] cursor-default select-none"
         style={{ perspective: 1000 }}
       >
@@ -537,6 +538,11 @@ function AboutCTA() {
 export default function About() {
   return (
     <main>
+      <SEO
+        title="About Us"
+        path="/about"
+        description="Learn about iConcepts — a 360° advertising agency in Chennai with 19+ years of experience. INS Accredited, DIPR Empanelled, and PRSI Gold Award winner serving 40+ clients across India."
+      />
       <AboutHero />
       <StorySection />
       <TeamSection />

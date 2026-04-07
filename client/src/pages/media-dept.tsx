@@ -14,6 +14,8 @@ import {
 } from "@/components/animations";
 import { NEWSPAPER_PARTNERS, SIGNATURE_ORBIT_TEXT } from "@/lib/constants";
 import { scrollToContact } from "@/lib/utils";
+import { SEO } from "@/components/seo";
+import { HeroGridLines } from "@/components/decorative-shapes";
 
 function MediaHero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -25,14 +27,10 @@ function MediaHero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[85vh] lg:min-h-screen bg-[#F8F8F8] overflow-hidden"
+      className="relative min-h-[85vh] lg:min-h-screen bg-[#F8F8F8] overflow-hidden flex flex-col justify-center"
       data-testid="section-media-hero"
     >
-      {/* Subtle grid texture */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: "linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)",
-        backgroundSize: "80px 80px"
-      }} />
+      <HeroGridLines />
       <div className="absolute top-[11%] right-[3%] z-[2] scale-[0.6] md:scale-[0.73] lg:scale-100 origin-top-right">
         <SignatureOrbit
           text={SIGNATURE_ORBIT_TEXT}
@@ -43,24 +41,11 @@ function MediaHero() {
         />
       </div>
 
-      {/* Newspaper-style column rules */}
-      <div className="absolute inset-0 hidden lg:block pointer-events-none">
-        <div className="absolute top-0 left-[25%] w-[1px] h-full bg-foreground/[0.04]" />
-        <div className="absolute top-0 left-[50%] w-[1px] h-full bg-foreground/[0.04]" />
-        <div className="absolute top-0 left-[75%] w-[1px] h-full bg-foreground/[0.04]" />
-      </div>
 
-      {/* Large background "02" */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 1 }}
-        className="absolute bottom-[5%] right-[5%] pointer-events-none select-none"
-      >
-        <span className="font-mono text-[clamp(8rem,20vw,18rem)] font-bold text-foreground/[0.03] leading-none">02</span>
-      </motion.div>
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 pt-28 sm:pt-32 lg:pt-40 pb-12 sm:pb-16 lg:pb-24">
+
+
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 w-full pt-16 lg:pt-0">
         {/* Top bar — newspaper masthead style */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -158,8 +143,12 @@ function NewspaperPartnersSection() {
           {NEWSPAPER_PARTNERS.map((partner, i) => {
             const isEconomicTimes = partner.name === "The Economic Times";
             return (
-              <FadeIn key={partner.name} delay={i * 0.05}>
-                <TiltCard tiltStrength={8} className="w-[240px] max-w-full">
+              <FadeIn
+                key={partner.name}
+                delay={i * 0.05}
+                className="w-[calc(50%-8px)] sm:w-[calc(33.333%-11px)]"
+              >
+                <TiltCard tiltStrength={8} className="w-full">
                   <motion.div
                     className="bg-white rounded-xl p-5 border border-border/40 flex flex-col items-center justify-center gap-3 group cursor-default shadow-sm hover:shadow-lg transition-all duration-300 min-h-[154px]"
                     whileHover={{ y: -4, borderColor: "hsl(0 78% 48% / 0.2)" }}
@@ -324,6 +313,11 @@ function MediaApproachSection() {
 export default function MediaDept() {
   return (
     <main>
+      <SEO
+        title="Media Department"
+        path="/media"
+        description="INS Accredited national-level media planning and buying. Newspaper, magazine, TV, radio, and outdoor advertising with full compliance and transparent billing."
+      />
       <MediaHero />
       <NewspaperPartnersSection />
       <MediaServicesSection />

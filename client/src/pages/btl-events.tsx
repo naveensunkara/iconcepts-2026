@@ -9,6 +9,8 @@ import {
 } from "@/components/animations";
 import { BTL_SERVICES, SIGNATURE_ORBIT_TEXT } from "@/lib/constants";
 import { scrollToContact } from "@/lib/utils";
+import { SEO } from "@/components/seo";
+import { HeroGridLines } from "@/components/decorative-shapes";
 
 function BTLHero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -30,11 +32,7 @@ function BTLHero() {
       className="relative min-h-[50vh] lg:min-h-[65vh] bg-[#F8F8F8] overflow-hidden flex items-center"
       data-testid="section-btl-hero"
     >
-      {/* Subtle grid texture */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: "linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)",
-        backgroundSize: "80px 80px"
-      }} />
+      <HeroGridLines />
       <div className="absolute top-[11%] right-[3%] z-[2] scale-[0.6] md:scale-[0.73] lg:scale-100 origin-top-right">
         <SignatureOrbit
           text={SIGNATURE_ORBIT_TEXT}
@@ -45,36 +43,9 @@ function BTLHero() {
         />
       </div>
 
-      {/* Mosaic of service words as background texture — hidden on small screens */}
-      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden hidden sm:block">
-        {scatteredWords.map((word, i) => (
-          <motion.span
-            key={word}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 + i * 0.06, duration: 0.8 }}
-            className="absolute font-heading font-extrabold text-foreground/[0.04] whitespace-nowrap"
-            style={{
-              top: `${8 + (i * 37) % 85}%`,
-              left: `${5 + (i * 53) % 90}%`,
-              fontSize: `${1 + (i % 3) * 0.8}rem`,
-              transform: `rotate(${-5 + (i % 7) * 2}deg)`,
-            }}
-          >
-            {word}
-          </motion.span>
-        ))}
-      </div>
 
-      {/* Grid lines */}
-      <div className="absolute inset-0 pointer-events-none hidden lg:block">
-        <div className="absolute top-[20%] left-0 w-full h-[1px] bg-foreground/[0.04]" />
-        <div className="absolute top-[80%] left-0 w-full h-[1px] bg-foreground/[0.04]" />
-        <div className="absolute top-0 left-[15%] w-[1px] h-full bg-foreground/[0.04]" />
-        <div className="absolute top-0 right-[15%] w-[1px] h-full bg-foreground/[0.04]" />
-      </div>
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 w-full pt-32 sm:pt-36 lg:pt-28">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 w-full pt-20 sm:pt-24 lg:pt-16">
         {/* BTL label — left aligned */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -139,7 +110,7 @@ function BTLServicesSection() {
           {["Outdoor Hoardings", "Bus Branding", "Bus Shelters", "LED Screening", "Digital Truck", "Vehicle Branding"].map((service, i) => (
             <FadeIn key={service} delay={i * 0.05}>
               <motion.div
-                className="px-4 py-6 bg-white rounded-xl border border-border/40 shadow-sm hover:shadow-lg hover:border-primary/30 transition-all duration-300 cursor-default text-center"
+                className="px-4 py-6 bg-white rounded-xl border border-border/40 shadow-sm hover:shadow-lg hover:border-primary/30 transition-all duration-300 cursor-default text-center flex items-center justify-center aspect-square sm:aspect-[4/3] lg:aspect-square"
                 whileHover={{ y: -4, scale: 1.03 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -375,6 +346,11 @@ function TruckVideoSection() {
 export default function BTLEvents() {
   return (
     <main>
+      <SEO
+        title="BTL & Outdoor Advertising"
+        path="/btl-events"
+        description="Below-the-line advertising services — outdoor hoardings, bus branding, bus shelter ads, LED screening, digital truck advertising, and vehicle branding across India."
+      />
       <BTLHero />
       <BTLServicesSection />
       <TruckVideoSection />

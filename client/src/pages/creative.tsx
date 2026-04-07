@@ -14,6 +14,8 @@ import {
 } from "@/components/animations";
 import { SIGNATURE_ORBIT_TEXT, MEDIA_ASSET_SHOWCASE } from "@/lib/constants";
 import { scrollToContact } from "@/lib/utils";
+import { SEO } from "@/components/seo";
+import { HeroGridLines } from "@/components/decorative-shapes";
 import {
   type CarouselApi,
   Carousel,
@@ -36,11 +38,7 @@ function CreativeHero() {
       className="relative min-h-[85vh] lg:min-h-screen bg-[#F8F8F8] overflow-hidden"
       data-testid="section-creative-hero"
     >
-      {/* Subtle grid texture */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: "linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)",
-        backgroundSize: "80px 80px"
-      }} />
+      <HeroGridLines />
 
       {/* Giant background word */}
       <div className="absolute top-[10%] -right-[5%] pointer-events-none select-none">
@@ -74,7 +72,7 @@ function CreativeHero() {
         />
       </div>
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 pt-28 sm:pt-32 lg:pt-40 pb-12 sm:pb-16 lg:pb-24">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 pt-20 sm:pt-24 lg:pt-28 pb-12 sm:pb-16 lg:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:min-h-[75vh] items-end">
           {/* Left — main headline */}
           <div className="lg:col-span-7">
@@ -254,39 +252,32 @@ function BrandIdentitySection() {
           </div>
         </div>
 
-        {/* Row 1: 5 logos */}
-        <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 sm:gap-4">
-          {BRAND_LOGOS.slice(0, 5).map((logo, i) => (
-            <FadeIn key={logo.name} delay={i * 0.06}>
-              <motion.div
-                className="group relative bg-white rounded-xl border border-white/10 overflow-hidden h-[120px] sm:h-[140px] flex items-center justify-center p-4 sm:p-6"
-                whileHover={{ y: -3, borderColor: "hsl(0 78% 48% / 0.3)" }}
-                transition={{ duration: 0.3 }}
+        {/* Logos: 2-col on mobile (last centered), 3-col on desktop (3×3) */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+          {BRAND_LOGOS.map((logo, i) => {
+            const isLast = i === BRAND_LOGOS.length - 1;
+            const isOddTotal = BRAND_LOGOS.length % 2 !== 0;
+            return (
+              <FadeIn
+                key={logo.name}
+                delay={i * 0.06}
+                className={isLast && isOddTotal ? "col-span-2 sm:col-span-1 flex justify-center" : ""}
               >
-                <img src={logo.src} alt={`${logo.name} brand logo`} className="max-w-full max-h-full object-contain" loading="lazy" />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-3 py-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <span className="text-white text-[10px] font-mono font-bold uppercase tracking-[0.15em]">{logo.name}</span>
-                </div>
-              </motion.div>
-            </FadeIn>
-          ))}
-        </div>
-        {/* Row 2: 4 logos centered */}
-        <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 sm:gap-4 mt-3 sm:mt-4 max-w-[80%] mx-auto">
-          {BRAND_LOGOS.slice(5, 9).map((logo, i) => (
-            <FadeIn key={logo.name} delay={(i + 5) * 0.06}>
-              <motion.div
-                className="group relative bg-white rounded-xl border border-white/10 overflow-hidden h-[120px] sm:h-[140px] flex items-center justify-center p-4 sm:p-6"
-                whileHover={{ y: -3, borderColor: "hsl(0 78% 48% / 0.3)" }}
-                transition={{ duration: 0.3 }}
-              >
-                <img src={logo.src} alt={`${logo.name} brand logo`} className="max-w-full max-h-full object-contain" loading="lazy" />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-3 py-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <span className="text-white text-[10px] font-mono font-bold uppercase tracking-[0.15em]">{logo.name}</span>
-                </div>
-              </motion.div>
-            </FadeIn>
-          ))}
+                <motion.div
+                  className={`group relative bg-white rounded-xl border border-white/10 overflow-hidden h-[120px] sm:h-[140px] flex items-center justify-center p-4 sm:p-6 ${
+                    isLast && isOddTotal ? "w-[calc(50%-6px)] sm:w-full" : "w-full"
+                  }`}
+                  whileHover={{ y: -3, borderColor: "hsl(0 78% 48% / 0.3)" }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <img src={logo.src} alt={`${logo.name} brand logo`} className="max-w-full max-h-full object-contain" loading="lazy" />
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-3 py-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <span className="text-white text-[10px] font-mono font-bold uppercase tracking-[0.15em]">{logo.name}</span>
+                  </div>
+                </motion.div>
+              </FadeIn>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -539,6 +530,11 @@ function MassVisibilitySection() {
 export default function Creative() {
   return (
     <main>
+      <SEO
+        title="Creative Department"
+        path="/creative"
+        description="Brand strategy, campaign ideation, print design, visual identity, and packaging design. iConcepts creative team delivers impactful communication for India's top brands."
+      />
       <CreativeHero />
       <CapabilitiesSection />
       <BrandIdentitySection />
