@@ -151,7 +151,9 @@ export function SEO({
               ? "BTL & Events"
               : path === "/events"
                 ? "Events"
-                : "";
+                : path === "/ai"
+                  ? "iConcepts AI"
+                  : "";
     if (pageName) {
       breadcrumbItems.push({ name: pageName, url: canonicalUrl });
     }

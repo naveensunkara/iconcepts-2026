@@ -56,6 +56,7 @@ export function Footer() {
                     { href: "/media", label: "Media" },
                     { href: "/btl-events", label: "BTL" },
                     { href: "/events", label: "Events" },
+                    { href: "/ai", label: "iConcepts AI" },
                   ].map((link) => (
                     <Link key={link.href} href={link.href}>
                       <motion.span

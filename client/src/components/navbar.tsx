@@ -13,6 +13,7 @@ const navLinks = [
   { href: "/media", label: "Media" },
   { href: "/btl-events", label: "BTL" },
   { href: "/events", label: "Events" },
+  { href: "/ai", label: "iConcepts AI" },
 ];
 
 export function Navbar() {

@@ -15,6 +15,7 @@ const Creative = lazy(() => import("@/pages/creative"));
 const MediaDept = lazy(() => import("@/pages/media-dept"));
 const BTLEvents = lazy(() => import("@/pages/btl-events"));
 const Events = lazy(() => import("@/pages/events"));
+const IconceptsAI = lazy(() => import("@/pages/iconcepts-ai"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 function ScrollToTop() {
@@ -74,6 +75,9 @@ function Router() {
           </Route>
           <Route path="/events">
             <PageTransition><Events /></PageTransition>
+          </Route>
+          <Route path="/ai">
+            <PageTransition><IconceptsAI /></PageTransition>
           </Route>
           <Route>
             <PageTransition><NotFound /></PageTransition>
