@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { MiddleEastOpportunities } from "@/components/middle-east-opportunities";
 import { Link } from "wouter";
 import { ArrowRight, ArrowDown, Quote } from "lucide-react";
 import {
@@ -69,8 +70,8 @@ function HeroSection() {
         style={{ y: heroY, opacity: heroOpacity }}
         className="relative z-10 px-6 lg:px-12 pb-8 sm:pb-10 lg:pb-12 pt-20 sm:pt-24 lg:pt-20"
       >
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-[1400px] mx-auto items-end">
-          <div className="md:col-span-3 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-8 max-w-[1400px] mx-auto items-end">
+          <div className="md:col-span-4 md:row-start-1 lg:col-span-5 lg:row-start-1 pb-8">
             <h1
               className="font-heading text-[clamp(2.5rem,8vw,8rem)] font-extrabold text-foreground leading-[0.88] tracking-[-0.03em]"
               data-testid="text-hero-headline"
@@ -102,11 +103,13 @@ function HeroSection() {
             </h1>
           </div>
 
+          <MiddleEastOpportunities className="md:col-span-6 md:row-start-2 lg:col-span-3 lg:row-start-1 lg:px-2" />
+
           <motion.div
             initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ delay: 1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden md:flex flex-col items-end gap-7 pb-4 w-full md:pr-[10%]"
+            className="hidden md:flex flex-col items-end gap-7 pb-4 w-full md:col-span-2 md:col-start-5 md:row-start-1 md:pr-[6%] lg:col-span-4 lg:col-start-auto lg:pr-[10%]"
           >
             {/* Quick stats */}
             <div className="flex items-center gap-5">
