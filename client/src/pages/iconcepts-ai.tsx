@@ -14,6 +14,7 @@ import { SEO } from "@/components/seo";
 import { HeroGridLines } from "@/components/decorative-shapes";
 
 const AI_LOGO = "/logos/iconcepts_ai.jpeg";
+const AI_VIDEO = "/WhatsApp Video 2026-04-15 at 10.07.11.mp4";
 
 const BODY_PARAGRAPHS = [
   "We are an INS Accredited 360° advertising agency with a dedicated AI wing Audio/Video. Through this, we are able to produce a wide range of advertisements at a fraction of the traditional cost and turnaround time.",
@@ -118,6 +119,31 @@ function IconceptsAIHero() {
             </motion.div>
           </div>
         </div>
+          <div className="lg:col-span-5 flex justify-center lg:justify-end relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 pt-20 sm:pt-24 lg:pt-28 pb-12 sm:pb-16 lg:pb-24">
+            <motion.div
+              initial={{ opacity: 0, y: 32 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.65, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full"
+            >
+              <TiltCard className="rounded-2xl border border-border/40 bg-white p-3 shadow-sm">
+                <div className="overflow-hidden rounded-xl bg-[#0A0C14] aspect-video flex items-center justify-center">
+                  <video
+                    src={AI_VIDEO}
+                    className="w-full h-full object-contain"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    controls
+                    poster={AI_LOGO}
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </TiltCard>
+            </motion.div>
+          </div>
       </div>
 
       <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-primary/25 via-transparent to-transparent" />
