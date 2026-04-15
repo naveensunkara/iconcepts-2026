@@ -1,5 +1,48 @@
 import nodemailer from "nodemailer";
 
+/**
+ * Google Workspace / Gmail: set GSUITE_EMAIL + GSUITE_APP_PASSWORD (App Password from
+ * Google Account → Security → 2-Step Verification → App passwords). Uses smtp.gmail.com.
+ *
+ * Other providers: set SMTP_HOST, SMTP_USER, SMTP_PASS (optional SMTP_PORT, SMTP_SECURE, SMTP_FROM).
+ */
+
+/** @returns {{ host: string; port: number; secure: boolean; user: string; pass: string } | null} */
+function resolveSmtpAuth() {
+  const generic =
+    process.env.SMTP_HOST &&
+    process.env.SMTP_USER &&
+    process.env.SMTP_PASS
+      ? {
+          host: process.env.SMTP_HOST,
+          port: parseInt(process.env.SMTP_PORT || "587", 10),
+          secure: process.env.SMTP_SECURE === "true",
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
+        }
+      : null;
+
+  if (generic) return generic;
+
+  const gsuiteUser = process.env.GSUITE_EMAIL?.trim();
+  const gsuitePass = process.env.GSUITE_APP_PASSWORD?.replace(/\s/g, "") || "";
+  if (gsuiteUser && gsuitePass) {
+    return {
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      user: gsuiteUser,
+      pass: gsuitePass,
+    };
+  }
+
+  return null;
+}
+
+export function isContactEmailConfigured() {
+  return resolveSmtpAuth() !== null;
+}
+
 /** @param {{ id: string; name: string; email: string; company?: string; phone?: string; requirement: string; createdAt: string }} inquiry */
 function buildTextBody(inquiry) {
   return [
@@ -36,33 +79,26 @@ function buildHtmlBody(inquiry) {
 </body></html>`;
 }
 
-export function isContactEmailConfigured() {
-  return Boolean(
-    process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS,
-  );
-}
-
 /**
  * Sends notification to CONTACT_NOTIFY_TO (default connect@iconcepts.in).
- * Set SMTP_HOST, SMTP_PORT (default 587), SMTP_USER, SMTP_PASS.
- * Optional: SMTP_SECURE=true, SMTP_FROM, CONTACT_NOTIFY_TO
  * @param {{ id: string; name: string; email: string; company?: string; phone?: string; requirement: string; createdAt: string }} inquiry
  */
 export async function sendContactInquiryNotification(inquiry) {
-  const port = parseInt(process.env.SMTP_PORT || "587", 10);
+  const cfg = resolveSmtpAuth();
+  if (!cfg) {
+    throw new Error("SMTP / G Suite mail is not configured");
+  }
+
   const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port,
-    secure: process.env.SMTP_SECURE === "true",
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
+    host: cfg.host,
+    port: cfg.port,
+    secure: cfg.secure,
+    auth: { user: cfg.user, pass: cfg.pass },
   });
 
   const to = process.env.CONTACT_NOTIFY_TO || "connect@iconcepts.in";
   const from =
-    process.env.SMTP_FROM || `iConcepts Website <${process.env.SMTP_USER}>`;
+    process.env.SMTP_FROM || `iConcepts Website <${cfg.user}>`;
 
   await transporter.sendMail({
     from,

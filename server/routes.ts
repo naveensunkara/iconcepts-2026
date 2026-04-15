@@ -22,7 +22,7 @@ export async function registerRoutes(
     const production = process.env.NODE_ENV === "production";
     if (production && !isContactEmailConfigured()) {
       console.error(
-        "[contact] Production requires SMTP_HOST, SMTP_USER, and SMTP_PASS",
+        "[contact] Production requires mail env: SMTP_HOST+SMTP_USER+SMTP_PASS, or GSUITE_EMAIL+GSUITE_APP_PASSWORD",
       );
       return res.status(503).json({
         error:
@@ -42,7 +42,7 @@ export async function registerRoutes(
       }
     } else {
       console.warn(
-        "[contact] SMTP not configured — inquiry saved but no email sent (set SMTP_* for notifications)",
+        "[contact] Mail not configured — inquiry saved but no email sent (set SMTP_* or GSUITE_EMAIL+GSUITE_APP_PASSWORD)",
       );
     }
 

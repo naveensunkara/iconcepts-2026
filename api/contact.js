@@ -36,7 +36,7 @@ export default async function handler(req, res) {
   const production = process.env.NODE_ENV === "production";
   if (production && !isContactEmailConfigured()) {
     console.error(
-      "[contact] Production requires SMTP_HOST, SMTP_USER, and SMTP_PASS",
+      "[contact] Production requires mail env: SMTP_* or GSUITE_EMAIL+GSUITE_APP_PASSWORD",
     );
     return res.status(503).json({
       error:
@@ -56,7 +56,7 @@ export default async function handler(req, res) {
     }
   } else {
     console.warn(
-      "[contact] SMTP not configured — no email sent (set SMTP_* on Vercel)",
+      "[contact] Mail not configured — no email sent (set SMTP_* or GSUITE_* on Vercel)",
     );
   }
 

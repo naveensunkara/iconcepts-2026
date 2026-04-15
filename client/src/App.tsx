@@ -16,6 +16,8 @@ const MediaDept = lazy(() => import("@/pages/media-dept"));
 const BTLEvents = lazy(() => import("@/pages/btl-events"));
 const Events = lazy(() => import("@/pages/events"));
 const IconceptsAI = lazy(() => import("@/pages/iconcepts-ai"));
+const MiddleEastRealEstate = lazy(() => import("@/pages/middle-east-real-estate"));
+const MiddleEastEducation = lazy(() => import("@/pages/middle-east-education"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 function ScrollToTop() {
@@ -78,6 +80,12 @@ function Router() {
           </Route>
           <Route path="/ai">
             <PageTransition><IconceptsAI /></PageTransition>
+          </Route>
+          <Route path="/middle-east/real-estate">
+            <PageTransition><MiddleEastRealEstate /></PageTransition>
+          </Route>
+          <Route path="/middle-east/education">
+            <PageTransition><MiddleEastEducation /></PageTransition>
           </Route>
           <Route>
             <PageTransition><NotFound /></PageTransition>

@@ -153,6 +153,10 @@ export function SEO({
                 ? "Events"
                 : path === "/ai"
                   ? "iConcepts AI"
+                  : path === "/middle-east/real-estate"
+                    ? "Middle East Real Estate"
+                    : path === "/middle-east/education"
+                      ? "Middle East Education"
                   : "";
     if (pageName) {
       breadcrumbItems.push({ name: pageName, url: canonicalUrl });

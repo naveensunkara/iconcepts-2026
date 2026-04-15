@@ -1,24 +1,12 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 
 const GULF_LOGO = "/logos/Gulf News logo.png";
 const REAL_ESTATE_LOGO = "/logos/middle-east-real-estate.svg";
 const EDUCATION_LOGO = "/logos/middle-east-education.svg";
 
-const DOWNLOAD_REAL_ESTATE = "/ppt/Real-Estate-Gulf-News.pptx";
-const DOWNLOAD_EDUCATION = "/ppt/Middle-East-NRI-Admissions-Opportunity-04.04.2026.pptx";
-
 type Step = "cta" | "gulf" | "sectors";
-
-function downloadFile(href: string, filename: string) {
-  const a = document.createElement("a");
-  a.href = href;
-  a.download = filename;
-  a.rel = "noopener";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-}
 
 const logoTileClass =
   "rounded-xl border border-border/40 bg-white p-[2px] shadow-sm transition-all duration-300 hover:border-primary/50 hover:shadow-md cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2";
@@ -27,6 +15,7 @@ const logoInnerClass = "flex h-[68px] w-[68px] items-center justify-center overf
 
 export function MiddleEastOpportunities({ className = "" }: { className?: string }) {
   const [step, setStep] = useState<Step>("cta");
+  const [, setLocation] = useLocation();
 
   return (
     <div
@@ -94,10 +83,8 @@ export function MiddleEastOpportunities({ className = "" }: { className?: string
                 <button
                   type="button"
                   className={logoTileClass}
-                  aria-label="Download real estate opportunities presentation"
-                  onClick={() =>
-                    downloadFile(DOWNLOAD_REAL_ESTATE, "middle-east-real-estate.pptx")
-                  }
+                  aria-label="View real estate opportunities page"
+                  onClick={() => setLocation("/middle-east/real-estate")}
                 >
                   <div className={`${logoInnerClass} bg-white`}>
                     <img src={REAL_ESTATE_LOGO} alt="" className="h-[70%] w-[70%] object-contain" />
@@ -112,10 +99,8 @@ export function MiddleEastOpportunities({ className = "" }: { className?: string
                 <button
                   type="button"
                   className={logoTileClass}
-                  aria-label="Download education opportunities presentation"
-                  onClick={() =>
-                    downloadFile(DOWNLOAD_EDUCATION, "middle-east-education.pptx")
-                  }
+                  aria-label="View education opportunities page"
+                  onClick={() => setLocation("/middle-east/education")}
                 >
                   <div className={`${logoInnerClass} bg-white`}>
                     <img src={EDUCATION_LOGO} alt="" className="h-[70%] w-[70%] object-contain" />
