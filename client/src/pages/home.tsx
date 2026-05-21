@@ -746,6 +746,59 @@ function AccreditationSection() {
             </FadeIn>
           </div>
         </div>
+
+        {/* Gulf News Accreditation Letter */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center mt-20 lg:mt-28">
+          <FadeIn delay={0.2}>
+            <div className="flex justify-center">
+              <TiltCard tiltStrength={8}>
+                <div className="max-w-[380px] rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl">
+                  <img
+                    src="/logos/gulf-news-accreditation.png"
+                    alt="Gulf News Agency Accreditation Letter"
+                    className="w-full h-auto object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              </TiltCard>
+            </div>
+          </FadeIn>
+
+          <div>
+            <FadeIn delay={0.3}>
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-8 h-[1px] bg-primary" />
+                <GlitchText
+                  text="Official Accreditation"
+                  className="text-primary text-sm font-mono font-bold uppercase tracking-[0.3em]"
+                />
+              </div>
+            </FadeIn>
+            <FadeIn delay={0.4}>
+              <h3 className="font-heading text-2xl md:text-3xl lg:text-4xl font-extrabold text-white leading-[1.1] tracking-[-0.02em]">
+                Authorized Agency Partner of Gulf News
+              </h3>
+            </FadeIn>
+            <FadeIn delay={0.5}>
+              <p className="mt-8 text-white/40 text-base leading-[1.8] max-w-lg">
+                iConcepts is formally accredited by Gulf News as an authorised agency partner in India, recognized for representing Gulf News across client portfolios, driving advertising and events partnerships, and strengthening their presence in the Indian market.
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.6}>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <span className="px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.08] text-white/50 text-xs font-mono tracking-wider">
+                  Al Nisr Publishing LLC
+                </span>
+                <span className="px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.08] text-white/50 text-xs font-mono tracking-wider">
+                  Dubai, UAE
+                </span>
+                <span className="px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.08] text-white/50 text-xs font-mono tracking-wider">
+                  Exclusive — Tamil Nadu
+                </span>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
       </div>
     </section>
   );
