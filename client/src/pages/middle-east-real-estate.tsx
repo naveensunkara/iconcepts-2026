@@ -5,19 +5,40 @@ import { HeroGridLines } from "@/components/decorative-shapes";
 import { SIGNATURE_ORBIT_TEXT } from "@/lib/constants";
 import { SEO } from "@/components/seo";
 
-const KEY_POINTS = [
-  "8M+ Indians in the Gulf with strong South Indian diaspora presence and intent to invest in India.",
-  "NRI buyer profile has shifted toward value-driven, premium-focused and high purchasing-power segments.",
-  "Currency advantage (AED/SAR to INR) increases affordability and speeds up buying decisions.",
-  "Gulf News offers digital, print, social amplification, email, newsletter and tele-calling touchpoints.",
-  "Campaign model is built around visibility, trust, and conversion with engagement tools like webinars and virtual tours.",
+const OPPORTUNITY_STATS = [
+  {
+    headline: "8 Million+ Prospects",
+    body: "A massive Indian diaspora across the Gulf, featuring a dense concentration of South Indian professionals with a strong intent to invest back home.",
+  },
+  {
+    headline: "The Currency Advantage",
+    body: "The strength of the AED and SAR against the INR significantly boosts their purchasing power, accelerating closing times and decision-making.",
+  },
+  {
+    headline: "The Premium Shift",
+    body: "Modern Gulf NRI buyers are heavily focused on luxury developments, gated communities, and high-yield commercial real estate.",
+  },
 ] as const;
 
-const VALUE_UNLOCKS = [
-  "Direct access to high-intent GCC property buyers",
-  "Media-backed credibility and premium brand positioning",
-  "Qualified investor engagement with managed execution",
-  "Potential for faster inventory movement and long-term NRI pipeline",
+const STRATEGIC_PILLARS = [
+  {
+    index: "01",
+    pillar: "Earn Visibility",
+    strategy: "Dominate the premium media environments your prospects trust daily.",
+    touchpoints: "Digital, Print, & Newsletter Takeovers",
+  },
+  {
+    index: "02",
+    pillar: "Build Trust",
+    strategy: "Replace cold pitches with story-led messaging that highlights ROI and security.",
+    touchpoints: "Editorial Features & Social Amplification",
+  },
+  {
+    index: "03",
+    pillar: "Convert Intent",
+    strategy: "Drive prospects into a structured, highly engaged sales funnel.",
+    touchpoints: "Webinars, Virtual Tours, & Tele-calling",
+  },
 ] as const;
 
 export default function MiddleEastRealEstatePage() {
@@ -31,8 +52,8 @@ export default function MiddleEastRealEstatePage() {
     <main>
       <SEO
         path="/middle-east/real-estate"
-        title="Middle East Opportunity - Real Estate"
-        description="Gulf NRI real estate opportunity: market context, campaign direction, and media pathway through Gulf News."
+        title="Capture the Gulf NRI Real Estate Surge"
+        description="Scale property sales by tapping into the high-purchasing-power Gulf NRI diaspora. iConcepts pairs 360° marketing with premium media partnerships to connect inventory with high-intent buyers."
       />
 
       <section
@@ -69,33 +90,68 @@ export default function MiddleEastRealEstatePage() {
             transition={{ delay: 0.2 }}
             className="font-heading text-[clamp(2rem,6vw,5rem)] font-extrabold leading-[0.95] tracking-[-0.03em] max-w-5xl"
           >
-            Unlocking Gulf NRI demand for
-            <span className="font-display italic text-primary"> real estate growth.</span>
+            Capture the Gulf NRI
+            <span className="font-display italic text-primary"> Real Estate Surge.</span>
           </motion.h1>
 
-          <p className="mt-8 text-muted-foreground text-base lg:text-lg leading-[1.85] max-w-3xl">
-            This page is built from the provided presentation and captures the core strategy:
-            earn visibility in trusted GCC media environments, build confidence with story-led
-            messaging, and convert intent through structured buyer journeys.
-          </p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35 }}
+            className="mt-6 text-foreground/85 text-lg lg:text-xl font-medium max-w-3xl"
+          >
+            Scale your property sales by tapping into a high-purchasing-power diaspora.
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45 }}
+            className="mt-6 text-muted-foreground text-base lg:text-lg leading-[1.85] max-w-3xl"
+          >
+            The Gulf Cooperation Council (GCC) region holds an untapped goldmine for Indian
+            real estate developers. iConcepts bridges the gap, combining 360° marketing
+            expertise with premium media partnerships to connect your inventory directly
+            with high-intent NRI buyers.
+          </motion.p>
         </div>
       </section>
 
       <section className="py-16 lg:py-24 bg-white">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-4">
-            <FadeIn>
-              <h2 className="font-heading text-3xl lg:text-4xl font-extrabold tracking-[-0.02em]">
-                Strategic takeaways
-              </h2>
-            </FadeIn>
-          </div>
-          <div className="lg:col-span-8 space-y-4">
-            {KEY_POINTS.map((item, i) => (
-              <FadeIn key={item} delay={i * 0.06}>
-                <div className="border border-border/40 rounded-xl p-5">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <FadeIn>
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-2xl" aria-hidden>🌐</span>
+              <span className="text-primary text-xs font-mono font-bold uppercase tracking-[0.3em]">
+                The Middle East Opportunity
+              </span>
+            </div>
+            <h2 className="font-heading text-3xl lg:text-5xl font-extrabold tracking-[-0.02em] max-w-4xl">
+              The opportunity, by the
+              <span className="font-display italic text-primary"> numbers.</span>
+            </h2>
+            <p className="mt-6 text-muted-foreground text-base lg:text-lg leading-[1.85] max-w-3xl">
+              The shift in the Gulf NRI profile means buyers are no longer just looking for
+              modest retirement homes—they are actively investing in premium, luxury, and
+              value-driven Indian real estate.
+            </p>
+          </FadeIn>
+
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5">
+            {OPPORTUNITY_STATS.map((stat, i) => (
+              <FadeIn key={stat.headline} delay={i * 0.08}>
+                <div className="group relative h-full bg-[#FAFAFA] border border-border/40 rounded-2xl p-7 lg:p-8 transition-all duration-300 hover:bg-white hover:border-primary/40 hover:shadow-[0_20px_60px_-30px_rgba(0,0,0,0.25)]">
+                  <div className="flex items-start justify-between mb-6">
+                    <span className="text-primary text-xs font-mono font-bold tracking-[0.2em]">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="w-8 h-[1px] bg-primary/40 mt-2" />
+                  </div>
+                  <h3 className="font-heading text-xl lg:text-2xl font-extrabold tracking-[-0.01em] mb-4">
+                    {stat.headline}
+                  </h3>
                   <p className="text-muted-foreground text-sm lg:text-base leading-[1.8]">
-                    {item}
+                    {stat.body}
                   </p>
                 </div>
               </FadeIn>
@@ -106,14 +162,87 @@ export default function MiddleEastRealEstatePage() {
 
       <section className="py-16 lg:py-24 bg-[#FAFAFA]">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-          <h3 className="font-heading text-2xl lg:text-3xl font-extrabold mb-8">
-            What this can unlock
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {VALUE_UNLOCKS.map((item, i) => (
-              <FadeIn key={item} delay={i * 0.05}>
-                <div className="bg-white border border-border/40 rounded-xl px-5 py-4 text-sm text-foreground/80">
-                  {item}
+          <FadeIn>
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-2xl" aria-hidden>⚡</span>
+              <span className="text-primary text-xs font-mono font-bold uppercase tracking-[0.3em]">
+                Our Strategic Framework
+              </span>
+            </div>
+            <h2 className="font-heading text-3xl lg:text-5xl font-extrabold tracking-[-0.02em] max-w-4xl">
+              Visibility to
+              <span className="font-display italic text-primary"> conversion.</span>
+            </h2>
+            <p className="mt-6 text-muted-foreground text-base lg:text-lg leading-[1.85] max-w-3xl">
+              We don't just run ads; we build structured buyer journeys through trusted,
+              high-credibility media environments like Gulf News. Our multi-channel campaign
+              model is engineered across three core pillars.
+            </p>
+          </FadeIn>
+
+          <div className="mt-12 hidden lg:grid grid-cols-12 gap-4 px-6 pb-4 border-b border-border/40">
+            <div className="col-span-1 text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted-foreground">
+              #
+            </div>
+            <div className="col-span-3 text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted-foreground">
+              Pillar
+            </div>
+            <div className="col-span-5 text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted-foreground">
+              Action Strategy
+            </div>
+            <div className="col-span-3 text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted-foreground">
+              Touchpoints Used
+            </div>
+          </div>
+
+          <div className="mt-4 space-y-4 lg:space-y-2">
+            {STRATEGIC_PILLARS.map((pillar, i) => (
+              <FadeIn key={pillar.pillar} delay={i * 0.08}>
+                <div className="group bg-white border border-border/40 rounded-2xl p-6 lg:p-0 transition-all duration-300 hover:border-primary/40 hover:shadow-[0_20px_60px_-30px_rgba(0,0,0,0.2)]">
+                  <div className="hidden lg:grid grid-cols-12 gap-4 items-center px-6 py-6">
+                    <div className="col-span-1">
+                      <span className="font-display italic text-3xl text-primary">
+                        {pillar.index}
+                      </span>
+                    </div>
+                    <div className="col-span-3">
+                      <h3 className="font-heading text-xl xl:text-2xl font-extrabold tracking-[-0.01em]">
+                        {pillar.pillar}
+                      </h3>
+                    </div>
+                    <div className="col-span-5">
+                      <p className="text-muted-foreground text-sm xl:text-base leading-[1.7]">
+                        {pillar.strategy}
+                      </p>
+                    </div>
+                    <div className="col-span-3">
+                      <p className="text-foreground/85 text-sm xl:text-base font-medium leading-[1.6]">
+                        {pillar.touchpoints}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="lg:hidden">
+                    <div className="flex items-baseline gap-3 mb-3">
+                      <span className="font-display italic text-2xl text-primary">
+                        {pillar.index}
+                      </span>
+                      <h3 className="font-heading text-xl font-extrabold tracking-[-0.01em]">
+                        {pillar.pillar}
+                      </h3>
+                    </div>
+                    <p className="text-muted-foreground text-sm leading-[1.8] mb-4">
+                      {pillar.strategy}
+                    </p>
+                    <div className="pt-4 border-t border-border/40">
+                      <p className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-muted-foreground mb-1">
+                        Touchpoints
+                      </p>
+                      <p className="text-foreground/85 text-sm font-medium">
+                        {pillar.touchpoints}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </FadeIn>
             ))}
