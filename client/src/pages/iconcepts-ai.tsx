@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import {
   FadeIn,
   GlitchText,
@@ -170,6 +170,46 @@ function IconceptsAIHero() {
               </TiltCard>
             </motion.div>
           </div>
+      </div>
+
+      {/* Add PDF presentation here */}
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 pt-12 sm:pt-16 lg:pt-20 pb-12 sm:pb-16 lg:pb-24">
+        <FadeIn>
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-12 h-[1px] bg-primary" />
+            <GlitchText
+              text="The presentation"
+              className="text-primary text-sm font-mono font-bold uppercase tracking-[0.3em]"
+            />
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.1}>
+          <div className="w-full max-w-[960px] mx-auto">
+            <TiltCard className="rounded-2xl border border-border/40 bg-white p-3 shadow-sm">
+              <div className="overflow-hidden rounded-xl bg-[#0A0C14] aspect-video flex items-center justify-center">
+                <iframe
+                  src="/ppt/Presentation%20Revised%202.pdf"
+                  title="iConcepts AI Presentation"
+                  className="w-full h-full border-0"
+                />
+              </div>
+            </TiltCard>
+
+            <div className="mt-5 flex justify-center">
+              <a
+                href="/ppt/Presentation%20Revised%202.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 text-primary text-xs font-mono font-bold uppercase tracking-[0.14em] hover:underline"
+                data-testid="link-ai-presentation"
+              >
+                Open Presentation
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
+        </FadeIn>
       </div>
 
       <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-primary/25 via-transparent to-transparent" />
